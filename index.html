@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sprout — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:      #EEF1E3;
+    --paper-dim:  #E4E9D6;
+    --ink:        #223121;
+    --forest:     #1F3D2B;
+    --moss:       #5B7F5E;
+    --moss-soft:  #8FA989;
+    --gold:       #D9A441;
+    --gold-dim:   #E9C77A;
+    --clay:       #A8623F;
+    --twine:      #C9BE9C;
+    --shadow:     rgba(31,61,43,0.16);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(140,165,120,0.14), transparent 45%),
+      radial-gradient(circle at 90% 30%, rgba(217,164,65,0.10), transparent 40%);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:72px 0 56px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--twine);
+  }
+  .vine{
+    position:absolute;
+    top:-10px; left:50%;
+    transform:translateX(-50%);
+    width:2px;
+    height:0;
+    background:var(--moss);
+    animation:grow 1.4s ease-out forwards;
+    animation-delay:.2s;
+  }
+  @keyframes grow{ to{ height:64px; } }
+  .leaf{
+    position:absolute;
+    width:16px; height:16px;
+    opacity:0;
+    animation:leafPop .5s ease-out forwards;
+  }
+  @keyframes leafPop{ to{ opacity:1; transform:scale(1) rotate(var(--rot)); } }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--moss);
+    margin:88px 0 10px;
+  }
+  h1.wordmark{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(52px,9vw,88px);
+    line-height:.95;
+    margin:0;
+    color:var(--forest);
+    letter-spacing:-0.01em;
+  }
+  .tagline{
+    font-size:16px;
+    color:var(--ink);
+    opacity:.75;
+    margin:16px auto 0;
+    max-width:440px;
+    line-height:1.5;
+  }
+  .locale{
+    margin-top:22px;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--clay);
+    letter-spacing:.04em;
+  }
+  .locale span{opacity:.55; color:var(--ink);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(238,241,227,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--twine);
+  }
+  .nav-row{
+    display:flex; gap:28px; justify-content:center;
+    padding:14px 24px; flex-wrap:wrap;
+  }
+  .nav-row a{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--forest);
+    text-decoration:none;
+    opacity:.65;
+    transition:opacity .2s;
+  }
+  .nav-row a:hover, .nav-row a:focus-visible{opacity:1;}
+
+  /* ---------- SECTIONS ---------- */
+  section.menu-section{padding:64px 0 8px;}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:8px;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:32px;
+    color:var(--forest);
+    margin:0;
+  }
+  .section-head .count{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--moss);
+    opacity:.7;
+  }
+  .section-note{
+    font-size:14px;
+    color:var(--ink);
+    opacity:.65;
+    max-width:520px;
+    margin:0 0 30px;
+    line-height:1.5;
+  }
+
+  /* ---------- SEED-PACKET CARDS ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:18px;
+    margin-bottom:16px;
+  }
+  .card{
+    background:var(--paper-dim);
+    border:1px solid var(--twine);
+    border-radius:3px;
+    padding:20px 20px 18px;
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px var(--shadow);
+    border-color:var(--moss-soft);
+  }
+  .card::before{
+    /* stitched top edge like a seed packet */
+    content:"";
+    position:absolute;
+    top:8px; left:14px; right:14px;
+    height:0;
+    border-top:1.5px dashed var(--moss-soft);
+    opacity:.6;
+  }
+  .card-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-top:8px;
+    gap:10px;
+  }
+  .card-icon{
+    flex:0 0 auto;
+    width:30px; height:30px;
+    color:var(--moss);
+  }
+  .card-icon svg{width:100%; height:100%;}
+  .card h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0 0 6px;
+    color:var(--forest);
+  }
+  .card p{
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--ink);
+    opacity:.75;
+    margin:0 0 14px;
+  }
+  .card-foot{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px dashed var(--twine);
+    padding-top:10px;
+  }
+  .tag{
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--clay);
+    background:rgba(168,98,63,0.09);
+    padding:3px 7px;
+    border-radius:2px;
+  }
+  .price{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:14px;
+    color:var(--forest);
+  }
+
+  /* ---------- SPECIALS BOARD (signature) ---------- */
+  .board{
+    margin:70px 0 60px;
+    background:var(--forest);
+    color:var(--paper);
+    border-radius:6px;
+    padding:36px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .board::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 26px);
+    pointer-events:none;
+  }
+  .board-head{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    color:var(--gold-dim);
+    margin-bottom:14px;
+  }
+  .board-head .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.4;} 50%{opacity:1;} }
+  .board h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:28px;
+    margin:0 0 6px;
+    color:#fff;
+  }
+  .board p.desc{
+    font-size:14.5px;
+    line-height:1.6;
+    color:rgba(238,241,227,0.8);
+    max-width:520px;
+    margin:0 0 22px;
+  }
+  .board-price-row{
+    display:flex; align-items:center; gap:16px;
+    font-family:'Space Mono', monospace;
+  }
+  .board-price{
+    font-size:22px; font-weight:700; color:var(--gold-dim);
+  }
+  .board-note{
+    font-size:12px; color:rgba(238,241,227,0.55);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--twine);
+    padding:36px 0 60px;
+    text-align:center;
+  }
+  footer .fname{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:20px;
+    color:var(--forest);
+  }
+  footer .fnote{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink);
+    opacity:.55;
+    margin-top:8px;
+    line-height:1.7;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .vine, .leaf, .board-head .dot{animation:none !important;}
+    .vine{height:64px;}
+    .leaf{opacity:1;}
+  }
+
+  a:focus-visible, .card:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="vine">
+    <div class="leaf" style="top:14px; left:-13px; --rot:-25deg; animation-delay:.5s; color:var(--moss);">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 6 5 11 8 16c2 3 6 4 9 2-4 0-7-2-8-6 3 3 7 3 9 0 2-3 0-8-6-10z"/></svg>
+    </div>
+    <div class="leaf" style="top:34px; left:8px; --rot:20deg; animation-delay:.75s; color:var(--moss-soft);">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 6 5 11 8 16c2 3 6 4 9 2-4 0-7-2-8-6 3 3 7 3 9 0 2-3 0-8-6-10z"/></svg>
+    </div>
+  </div>
+  <div class="eyebrow">Harlow Valley · Callebaut</div>
+  <h1 class="wordmark">The&nbsp;Sprout</h1>
+  <p class="tagline">A one-room greenhouse café where most of what's on your plate was growing here this morning.</p>
+  <div class="locale">docked below the Albatross <span>·</span> open early, closed whenever the herbs run out</div>
+</div>
+
+<nav>
+  <div class="nav-row">
+    <a href="#drinks">Drinks</a>
+    <a href="#toast">Toast &amp; Small Plates</a>
+    <a href="#baked">Baked</a>
+    <a href="#harvest">Today's Harvest</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="menu-section" id="drinks">
+    <div class="section-head"><h2>Drinks</h2><span class="count">05</span></div>
+    <p class="section-note">Everything poured over ice comes from the tower behind the counter — mint, lemon balm, and whatever else is leaning toward the light.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Basil Bloom Latte</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16M6 20V9a6 6 0 0112 0v11"/><path d="M9 9c0-3 3-4 3-4s3 1 3 4"/></svg></div>
+        </div>
+        <p>Espresso, steamed oat milk, basil syrup pressed that morning. Tastes greener than it sounds.</p>
+        <div class="card-foot"><span class="tag">house favorite</span><span class="price">4.75</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Mint Fog</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12c2-4 5-6 7-6s5 2 7 6M4 17c3-2 6-3 8-3s5 1 8 3"/></svg></div>
+        </div>
+        <p>Cold-brewed mint tea, soda water, a cloud of lime foam. Named for what the Albatross's deck looks like at dawn.</p>
+        <div class="card-foot"><span class="tag">iced · caffeine-free</span><span class="price">4.25</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Sunroot Chai</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+        </div>
+        <p>Black tea, house-ground turmeric and ginger, steamed milk. Warms you up faster than the plaza sun does.</p>
+        <div class="card-foot"><span class="tag">warm</span><span class="price">4.50</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Harborwatch Cold Brew</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h14l-1.5 15a2 2 0 01-2 2H8.5a2 2 0 01-2-2L5 3z"/><path d="M9 3v2M15 3v2"/></svg></div>
+        </div>
+        <p>Steeped eighteen hours, served black over ice. The dockworkers' regular — strong enough to survive a shift change.</p>
+        <div class="card-foot"><span class="tag">strong</span><span class="price">4.00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Vine Mary <span style="font-weight:400;font-size:14px;opacity:.6;">(mocktail)</span></h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="7"/><path d="M12 6c0-2 1-3 2-4"/></svg></div>
+        </div>
+        <p>Muddled roof tomatoes, celery bitters, cracked pepper. Savory, a little strange, genuinely good.</p>
+        <div class="card-foot"><span class="tag">no alcohol</span><span class="price">5.25</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="toast">
+    <div class="section-head"><h2>Toast &amp; Small Plates</h2><span class="count">04</span></div>
+    <p class="section-note">Bread comes from the bakery two doors down. Everything on top of it came from behind you.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Microgreen Toast</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18h18M6 18V8h12v10"/><path d="M9 8c0-3 1.5-4 3-4s3 1 3 4"/></svg></div>
+        </div>
+        <p>Sourdough, whipped ricotta, whatever's tallest in the tower that day, olive oil, flaky salt.</p>
+        <div class="card-foot"><span class="tag">vegetarian</span><span class="price">7.50</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Roof Tomato Bruschetta</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M12 7c0-2 1.5-3 3-3"/></svg></div>
+        </div>
+        <p>Grilled bread, roof-grown tomatoes, basil, a shameless amount of garlic.</p>
+        <div class="card-foot"><span class="tag">vegan</span><span class="price">6.75</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Herb &amp; Curd Plate</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="12" rx="1.5"/><path d="M8 6V4h8v2"/></svg></div>
+        </div>
+        <p>Fresh curd, a fistful of clipped herbs, cracked pepper, crackers on the side.</p>
+        <div class="card-foot"><span class="tag">shareable</span><span class="price">8.00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Mushroom &amp; Egg Bowl</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 4 0 0116 0z"/><path d="M6 12v3a6 6 0 0012 0v-3"/></svg></div>
+        </div>
+        <p>Soft egg, pan-roasted mushrooms from the dark rack in back, herb oil, rice.</p>
+        <div class="card-foot"><span class="tag">gluten-free</span><span class="price">9.25</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="baked">
+    <div class="section-head"><h2>Baked</h2><span class="count">03</span></div>
+    <p class="section-note">Small batches. Once they're gone, the specials board says so.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Chamomile Shortbread</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4"/></svg></div>
+        </div>
+        <p>Buttery, faintly floral, dusted with sugar. Good with anything on the drinks list.</p>
+        <div class="card-foot"><span class="tag">vegetarian</span><span class="price">3.50</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Seed Loaf, sliced</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M6 12h12"/></svg></div>
+        </div>
+        <p>Dense, nutty, packed with whatever seeds were left over from planting. Toasted on request.</p>
+        <div class="card-foot"><span class="tag">vegan</span><span class="price">4.00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div><h3>Honey Herb Scone</h3></div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l3 6 6 1-4.5 4.5L18 21l-6-3-6 3 1.5-6.5L3 10l6-1z"/></svg></div>
+        </div>
+        <p>Rosemary and thyme folded into the dough, honey glaze on top. Changes herb depending on the week.</p>
+        <div class="card-foot"><span class="tag">vegetarian</span><span class="price">3.75</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="harvest">
+    <div class="board">
+      <div class="board-head"><span class="dot"></span> today's harvest board</div>
+      <h2>Whatever's Ripe</h2>
+      <p class="desc">One dish, decided each morning by whatever's ready to cut. The owner writes it on the chalk slate by the door — ask the counter if you can't read the handwriting. Comes with a slice of seed loaf.</p>
+      <div class="board-price-row">
+        <span class="board-price">market price</span>
+        <span class="board-note">— usually somewhere between 7 and 10</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="fname">The Sprout</div>
+  <div class="fnote">Harlow Valley, Callebaut · below the Albatross<br>seating is small — if it's full, it's full</div>
+</footer>
+
+</body>
+</html>
